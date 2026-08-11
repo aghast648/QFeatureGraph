@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "qfeaturegraph"
+version = "0.0.0"
+description = "Graph-based structured CNN channel pruning with exact QUBO optimization and ideal QAOA comparison"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Alireza Ghazanfary" },
+]
+keywords = [
+  "channel-pruning",
+  "feature-graph",
+  "qubo",
+  "qaoa",
+  "pytorch",
+  "qiskit",
+]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "matplotlib",
+  "networkx",
+  "numpy",
+  "pandas",
+  "PyYAML",
+  "scipy",
+  "torch",
+  "torchvision",
+]
+
+[project.optional-dependencies]
+quantum = ["qiskit"]
+dev = [
+  "mypy",
+  "pytest",
+  "pytest-cov",
+  "ruff",
+  "types-PyYAML",
+]
+
+[project.urls]
+Homepage = "https://github.com/aghast648/QFeatureGraph"
+Repository = "https://github.com/aghast648/QFeatureGraph"
+Issues = "https://github.com/aghast648/QFeatureGraph/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/qfeaturegraph"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_configs = true

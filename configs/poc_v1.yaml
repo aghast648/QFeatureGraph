@@ -1,0 +1,79 @@
+experiment:
+  name: qfeaturegraph_poc_v1
+  seeds: [17, 42, 91]
+  output_dir: results/runs
+
+data:
+  dataset: FashionMNIST
+  root: data/raw
+  split_seed: 42
+  train_size: 50000
+  calibration_size: 5000
+  validation_size: 5000
+  official_test_size: 10000
+  hold_out_official_test_until_final: true
+
+model:
+  input_channels: 1
+  conv1_channels: 8
+  conv2_channels: 16
+  hidden_units: 64
+  kernel_size: 3
+  padding: 1
+  pool_size: 2
+
+training:
+  epochs: 10
+  batch_size: 128
+  optimizer: Adam
+  learning_rate: 0.001
+  weight_decay: 0.0
+
+feature_graph:
+  layer: conv1
+  capture_point: post_relu
+  source_split: calibration
+  spatial_reduction: global_average
+  similarity: pearson
+  redundancy_transform: positive_part
+  constant_channel_tolerance: 1.0e-12
+
+importance:
+  method: single_channel_masking
+  metric: calibration_loss_increase
+  preserve_raw_values: true
+  qubo_transform: positive_part_max_normalize
+
+selection:
+  retained_channels: 4
+  importance_weight: 1.0
+  redundancy_weight: 0.5
+  cardinality_penalty: 10.0
+
+exact_solver:
+  enumerate_all_bitstrings: true
+  require_cardinality: 4
+
+qaoa:
+  enabled: true
+  simulator: ideal_statevector
+  primitive_interface: v2
+  depth: 1
+  optimizer: COBYLA
+  optimizer_max_iterations: 200
+  shots: 4096
+  seed: 42
+
+fine_tuning:
+  enabled: true
+  epochs: 5
+  optimizer: Adam
+  learning_rate: 0.0001
+
+evaluation:
+  primary_metric: accuracy
+  report_loss: true
+  report_parameter_count: true
+  report_model_size: true
+  report_latency_when_reliable: true
+  report_selection_stability: true
