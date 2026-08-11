@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.python-version
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# Test, lint, type-check, and coverage caches
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+
+# Downloaded data and generated artifacts
+data/*
+!data/README.md
+artifacts/*
+!artifacts/README.md
+
+# Generated and exploratory results
+results/raw/
+results/runs/
+results/tmp/
+
+# Logs and local scratch
+*.log
+tmp/
+scratch/
