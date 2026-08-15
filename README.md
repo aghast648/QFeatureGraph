@@ -2,7 +2,7 @@
 
 Graph-based structured CNN channel pruning with exact QUBO optimization and an ideal QAOA comparison.
 
-> **Status:** Repository scaffold and proof-of-concept specification are complete. Implementation has not started.
+> **Status:** Repository scaffold, proof-of-concept specification, and environment smoke check are complete. Scientific implementation has not started.
 
 QFeatureGraph is a reproducible proof-of-concept investigating whether graph structure can improve fixed-cardinality channel pruning in a small convolutional neural network (CNN). It represents hidden channels as nodes, estimates redundancy from activation correlations, measures importance by channel ablation, formulates selection as a quadratic unconstrained binary optimization (QUBO) problem, and compares exact, importance-only, and ideal quantum approximate optimization algorithm (QAOA) selections.
 
@@ -98,9 +98,12 @@ QFeatureGraph/
 │   └── README.md
 ├── results/
 │   └── README.md
+├── scripts/
+│   └── environment_smoke_test.py
 ├── src/
 │   ├── README.md
 │   └── qfeaturegraph/
+│       ├── __init__.py
 │       ├── README.md
 │       ├── data/
 │       │   └── README.md
@@ -141,6 +144,22 @@ python -m pip install -e ".[dev,quantum]"
 
 Windows PowerShell uses `.venv\Scripts\Activate.ps1` instead of `source .venv/bin/activate`. Executable training and reproduction commands will be documented with the first implementation; the repository currently contains no runnable experiment code.
 
+Verify Python, every core dependency, package imports, and a tiny in-memory
+feature-graph operation with:
+
+```bash
+python scripts/environment_smoke_test.py
+```
+
+The checker reads the Python and core dependency minimums directly from
+`pyproject.toml`, so its version requirements cannot drift from the package
+metadata. Newer versions pass; optional `dev` and `quantum` dependencies are
+outside this environment check. A healthy setup ends with:
+
+```text
+Environment smoke test: PASS
+```
+
 ## Reproducibility contract
 
 - `configs/poc_v1.yaml` is the canonical experiment contract; `configs/smoke_test.yaml` is the fast end-to-end check.
@@ -159,4 +178,3 @@ The [eight-week roadmap](docs/roadmap.md) progresses from deterministic data and
 ## License and citation
 
 Code and repository documentation are released under the [MIT License](LICENSE). Citation metadata is provided in [CITATION.cff](CITATION.cff). The initial technical bibliography is in [docs/references.bib](docs/references.bib).
-

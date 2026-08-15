@@ -28,24 +28,25 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
-  "matplotlib",
-  "networkx",
-  "numpy",
-  "pandas",
-  "PyYAML",
-  "scipy",
-  "torch",
-  "torchvision",
+  "matplotlib>=3.9",
+  "networkx>=3.3",
+  "numpy>=2.0",
+  "packaging>=24.1",
+  "pandas>=2.2",
+  "PyYAML>=6.0.1",
+  "scipy>=1.13",
+  "torch>=2.3",
+  "torchvision>=0.18",
 ]
 
 [project.optional-dependencies]
-quantum = ["qiskit"]
+quantum = ["qiskit>=1.2"]
 dev = [
-  "mypy",
-  "pytest",
-  "pytest-cov",
-  "ruff",
-  "types-PyYAML",
+  "mypy>=1.11",
+  "pytest>=8.3",
+  "pytest-cov>=5.0",
+  "ruff>=0.6",
+  "types-PyYAML>=6.0.12.20240808",
 ]
 
 [project.urls]
